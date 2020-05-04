@@ -17,28 +17,33 @@ def load_data(filename):
         return json.loads(json_string)
 
 
+def get_or_load_data(filename, getter_func, getter_func_args=[], allow_saved_data=True):
+    data = None
+    if path.exists(filename) and allow_saved_data:
+        data = load_data(filename)
+    else:
+        data = getter_func(*getter_func_args)
+        save_data(filename, data)
+    return data
+
+
 def get_all_products(allow_saved_data=True):
     filename = "products.json"
-    products = None
-    if path.exists(filename) and allow_saved_data:
-        products = load_data(filename)
-    else:
-        products = api.get_all_products()
-        save_data(filename, products)
-
+    getter_func = api.get_all_products
+    products = get_or_load_data(
+        filename, getter_func, allow_saved_data=allow_saved_data
+    )
     return products
 
 
 def get_products_from_ids(ids_list, allow_saved_data=True):
     filename = "interesting_items.json"
-    interesting_items = None
-    if path.exists(filename) and allow_saved_data:
-        interesting_items = load_data(filename)
-    else:
-        interesting_items = api.get_products_from_ids(ids_list)
-        save_data(filename, interesting_items)
-
-    return interesting_items
+    getter_func = api.get_products_from_ids
+    getter_func_args = [ids_list]
+    products = get_or_load_data(
+        filename, getter_func, getter_func_args, allow_saved_data
+    )
+    return products
 
 
 def load_latest_available_items_dump():
