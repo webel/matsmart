@@ -1,5 +1,6 @@
 import api
 import json
+import sys
 from os import path
 
 ###
@@ -19,6 +20,8 @@ def load_data(filename):
 
 def get_or_load_data(filename, getter_func, getter_func_args=[], allow_saved_data=True):
     data = None
+    if sys.modules[__name__] == "test":
+        filename = "test_data/" + filename
     if path.exists(filename) and allow_saved_data:
         data = load_data(filename)
     else:
@@ -49,7 +52,7 @@ def get_products_from_ids(ids_list, allow_saved_data=True):
 def load_latest_available_items_dump():
     # Loads 'available_items_dump.json' into a json object
     # which is returned
-    # NOTE: only used for testing purposes
+    # NOTE: only used for testing purposes in repl
     with open("available_items_dump.json") as f:
         json_string = f.read()
         available_items = json.loads(json_string)

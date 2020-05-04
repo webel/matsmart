@@ -1,4 +1,5 @@
 import json
+import sys
 from pandas import DataFrame
 from data import get_all_products, get_products_from_ids
 
@@ -10,7 +11,8 @@ from data import get_all_products, get_products_from_ids
 
 # Used for initial testing, exchange this for an excel document
 # dumped in the same directory
-naive_item_list = ["bovete", "chia", "matvete", "quinoa", "havregryn"]
+test_item_list = ["bovete", "chia", "matvete", "quinoa", "havregryn"]
+interesting_item_list = test_item_list
 
 
 def is_available_item(item_row):
@@ -27,7 +29,9 @@ def is_available_item(item_row):
 
 
 def is_interesting_simplified_item(simplified_item_row):
-    return any(item in simplified_item_row for item in naive_item_list)
+    if sys.modules[__name__] == "test":
+        return any(item in simplified_item_row for item in test_item_list)
+    return any(item in simplified_item_row for item in interesting_item_list)
 
 
 def get_simplified_interesting_items_dataframe():
@@ -60,6 +64,3 @@ def get_available_items_dataframe():
 def get_available_items_json():
     available_items_dataframe = get_available_items_dataframe()
     return available_items_dataframe.to_dict(orient="record")
-
-
-# df["alias"].apply(lambda x: any(item in x for item in naive_item_list))
