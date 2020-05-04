@@ -9,7 +9,7 @@ when run as a module it returns a json containing the items with key value pairs
 import json
 import sys
 from pandas import DataFrame
-from data import get_all_products, get_products_from_ids
+from data import get_all_products, get_products_from_ids, save_data
 
 ###
 # TODO
@@ -73,3 +73,8 @@ def get_available_items_dataframe():
 def get_available_items_json():
     available_items_dataframe = get_available_items_dataframe()
     return available_items_dataframe.to_dict(orient="record")
+
+
+if __name__ == "__main__":
+    available_items = get_available_items_json()
+    save_data("available_items.json", available_items)
