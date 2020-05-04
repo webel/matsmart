@@ -49,11 +49,11 @@ def get_products_from_ids(ids_list, allow_saved_data=True):
     return products
 
 
-def load_latest_available_items_dump():
+def load_latest_available_items():
     # Loads 'available_items_dump.json' into a json object
     # which is returned
     # NOTE: only used for testing purposes in repl
-    with open("available_items_dump.json") as f:
+    with open("available_items.json") as f:
         json_string = f.read()
         available_items = json.loads(json_string)
     return available_items
