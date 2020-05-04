@@ -1,12 +1,21 @@
+"""Check Matsmart for interesting items
+@author Evita Stenqvist
+@year 2020
+
+Checks matsmart.se for items in interesting_item_list variable found in this document,
+when run as a module it returns a json containing the items with key value pairs from Matsmart's API.
+"""
+
 import json
 import sys
 from pandas import DataFrame
 from data import get_all_products, get_products_from_ids
 
-
 ###
 # TODO
-# escape swedish letters
+# + load interesting items from file
+#   + load interesting items from csv file (to conform to partners and my's spreadsheet over bulk-shopping)
+# + escape swedish letters
 ###
 
 # Used for initial testing, exchange this for an excel document
