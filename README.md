@@ -19,14 +19,14 @@ So, I built this rudimentary script to check the Matsmart API for "interesting i
 Change the `interesting_item_list` in `matsmart.py` with whatever you deem interesting, or just run as is to see what I find interesting (buckwheat, quinoa, chia...).
 
 ```sh
-python -m matsmart
+> python matsmart.py
 ```
 
 ### Test
 Absolutely most simple test has been included, for my purposes mostly when refactoring, to check that the mechanisms extracting `available_items` indeed do what they're supposed to. That's why there is a `test_data` folder.
 
 ```sh
-python -m test
+> python -m test
 ```
 
 Prints "Passed" to console if the expected data is returned from `matsmart.py`.
