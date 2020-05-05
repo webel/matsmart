@@ -18,8 +18,8 @@ def get_all_products():
     return process_request(request)
 
 
-def get_products_from_ids(ids_list):
-    ids_string = ",".join(ids_list)
-    url = api_product_url.format(ids_string)
+def get_products_from_ids(ids):
+    stringified_ids = ",".join(ids)
+    url = api_product_url.format(stringified_ids)
     request = requests.get(url)
     return process_request(request)

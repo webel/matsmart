@@ -1,5 +1,5 @@
-from data import load_data
-from matsmart import get_available_items_dict
+from data import load_data_from_json_file
+from matsmart import get_available_items
 
 """
 Super-rudimentary testing, invoke as module;
@@ -20,8 +20,8 @@ def ordered(obj):
 
 
 def test_available_result():
-    test_result = get_available_items_dict()
-    correct_result = load_data(filename="test_data/results.json")
+    test_result = get_available_items(as_dict=True)
+    correct_result = load_data_from_json_file(filename="test_data/results.json")
     assert ordered(test_result) == ordered(correct_result), "Should be same result"
 
 
